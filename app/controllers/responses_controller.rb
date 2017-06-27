@@ -1,5 +1,37 @@
 class ResponsesController < ApplicationController
 
+  def index
+     {
+      name: "responses",
+      children: [
+        {
+          name: "locations",
+          children: [
+            {
+              name: "London",
+              children: [
+              {name: "Ruby", count: 3938},
+              {name: "Python", count: 3812},
+              {name: "Javascript", count: 6714},
+              {name: "PHP", count: 743}
+              ]
+            },
+            {
+              name: "Birmingham",
+              children: [
+                {name: "Ruby", count: 2938},
+                {name: "Python", count: 1812},
+                {name: "Javascript", count: 4714},
+                {name: "PHP", count: 543}
+              ]
+            }
+          ]
+        }
+      ]
+    }
+
+  end
+
   def new
     @languages = Language.all
   end
@@ -35,5 +67,6 @@ class ResponsesController < ApplicationController
   def create_response_location(response_id, city)
     redirect_to response_locations_path(response_id: response_id, city: city)
   end
+
 
 end
