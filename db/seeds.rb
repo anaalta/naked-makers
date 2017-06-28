@@ -24,6 +24,13 @@ def languages
   Language.create(name: 'Other')
 end
 
+def salaries 
+  Salary.create(name: 'Under £ 25,000')
+  Salary.create(name: '£ 25,000 - £ 30,000')
+  Salary.create(name: '£ 30,000 - £ 40,000')
+  Salary.create(name: 'Over £ 40,000')
+end
+
 case Rails.env
 when 'test'
   languages

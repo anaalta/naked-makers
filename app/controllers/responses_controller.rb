@@ -2,6 +2,7 @@ class ResponsesController < ApplicationController
 
   def new
     @languages = Language.all
+    @salaries = Salary.all
   end
 
   def create
@@ -18,7 +19,7 @@ class ResponsesController < ApplicationController
 
   private
   def response_params
-    params.require(:response).permit(:city, languages: [])
+    params.require(:response).permit(:city, languages: [], salaries: [])
   end
 
   def create_languages

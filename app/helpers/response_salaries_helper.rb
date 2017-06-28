@@ -1,0 +1,2 @@
+module ResponseSalariesHelper
+end
