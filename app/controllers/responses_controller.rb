@@ -14,6 +14,7 @@ class ResponsesController < ApplicationController
     @response ||= Response.new
     @response.save
     create_languages
+    create_salaries
     create_response_location(@response.id, response_params[:city])
   end
 
@@ -28,9 +29,20 @@ class ResponsesController < ApplicationController
     end
   end
 
+  def create_salaries
+    response_params[:salaries].each do |salary|
+      create_salary_join_response_path(salary, @response.id)
+    end
+  end
+
   def create_language_join_response_path(language, response_id)
     @response_language = ResponseLanguage.new(language_id: language, response_id: response_id)
     @response_language.save
+  end
+
+  def create_salary_join_response_path(salary, response_id)
+    @response_salary = ResponseSalary.new(salary_id: salary, response_id: response_id)
+    @response_salary.save
   end
 
   def create_response_location(response_id, city)

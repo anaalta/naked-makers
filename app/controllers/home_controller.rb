@@ -10,6 +10,14 @@ class HomeController < ApplicationController
     end
   end
 
+  def salary_data
+    respond_to do |format|
+      format.json {
+        render :json => create_salary_hash(ResponseSalary, :salary_id)
+      }
+    end
+  end
+
   def location_data
     respond_to do |format|
       format.json {
@@ -33,6 +41,16 @@ class HomeController < ApplicationController
     @languages = Language.all
     group_count(model, group_by).each do |key, value|
       key = @languages.find_by(id: key).name
+      data << { name: key, count: value }
+    end
+    return data
+  end
+
+  def create_salary_hash(model, group_by)
+    data = []
+    @salaries = Salary.all
+    group_count(model, group_by).each do |key, value|
+      key = @salaries.find_by(id: key).name
       data << { name: key, count: value }
     end
     return data
