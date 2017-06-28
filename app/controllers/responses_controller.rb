@@ -7,7 +7,7 @@ class ResponsesController < ApplicationController
 
   def create
     if !response_params[:languages] || response_params[:city] == ""
-      flash[:notice] = "Please complete both fields"
+      flash[:notice] = "Please complete the first two fields"
       redirect_to new_response_path
       return
     end
@@ -16,11 +16,12 @@ class ResponsesController < ApplicationController
     create_languages
     create_salaries
     create_response_location(@response.id, response_params[:city])
+    create_response_age(@response.id, response_params[:age])
   end
 
   private
   def response_params
-    params.require(:response).permit(:city, languages: [], salaries: [])
+    params.require(:response).permit(:city, :age, languages: [], salaries: [])
   end
 
   def create_languages
@@ -47,6 +48,10 @@ class ResponsesController < ApplicationController
 
   def create_response_location(response_id, city)
     redirect_to response_locations_path(response_id: response_id, city: city)
+  end
+
+  def create_response_age(response_id, age)
+    redirect_to response_age_path(response_id: response_id, age: age)
   end
 
 end

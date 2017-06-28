@@ -26,6 +26,15 @@ class HomeController < ApplicationController
     end
   end
 
+  def age_data
+    respond_to do |format|
+      format.json {
+        render :json => create_age_hash(Age, :age)
+      }
+    end
+  end
+
+
   private
 
   def create_location_hash(model, group_by)
@@ -52,6 +61,14 @@ class HomeController < ApplicationController
     group_count(model, group_by).each do |key, value|
       key = @salaries.find_by(id: key).name
       data << { name: key, count: value }
+    end
+    return data
+  end
+
+  def create_age_hash(model, group_by)
+    data = []
+    group_count(model, group_by).each do |key, value|
+      data << { age: key, count: value }
     end
     return data
   end
