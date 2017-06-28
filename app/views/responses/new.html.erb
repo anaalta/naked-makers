@@ -24,6 +24,9 @@
       <%= salary.name %>
       <%= check_box_tag 'response[salaries][]', salary.id, false, id: salary.id %><br/>
       <% end %>
+      <h3>Your age:</h3>
+      <%= f.label "Age:" %><br/>
+      <%= f.text_field :age, class: "form-control" %>
     </div>
     <br/>
     <%= f.submit "Submit Response", class: "btn btn-primary" %>
