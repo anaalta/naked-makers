@@ -7,7 +7,7 @@ class LocationsController < ApplicationController
   end
 
   def create
-    @location = Location.new(response_id: params[:response_id], city: params[:city])
+    @location = Location.new(response_id: params[:response_id], city: params[:city].capitalize)
     @location.save
     redirect_to root_url
     flash[:notice] = "Data submitted"

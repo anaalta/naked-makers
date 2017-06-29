@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170624172302) do
+ActiveRecord::Schema.define(version: 20170628144405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ages", force: :cascade do |t|
+    t.integer "age"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "languages", force: :cascade do |t|
     t.string "name"
@@ -39,9 +45,22 @@ ActiveRecord::Schema.define(version: 20170624172302) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "response_salaries", force: :cascade do |t|
+    t.integer "response_id"
+    t.integer "salary_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "responses", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "salaries", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
   end
 
   add_foreign_key "locations", "responses"
