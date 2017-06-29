@@ -15,24 +15,24 @@ class ResponsesController < ApplicationController
     @response.save
     create_languages
     create_salaries
-    create_response_location(@response.id, response_params[:city])
-    create_response_age(@response.id, response_params[:age])
+    create_response_location_age(@response.id, response_params[:city], response_params[:age] )
   end
 
   private
+
   def response_params
     params.require(:response).permit(:city, :age, languages: [], salaries: [])
   end
 
   def create_languages
     response_params[:languages].each do |language|
-      create_language_join_response_path(language, @response.id)
+    create_language_join_response_path(language, @response.id)
     end
   end
 
   def create_salaries
     response_params[:salaries].each do |salary|
-      create_salary_join_response_path(salary, @response.id)
+    create_salary_join_response_path(salary, @response.id)
     end
   end
 
@@ -46,12 +46,8 @@ class ResponsesController < ApplicationController
     @response_salary.save
   end
 
-  def create_response_location(response_id, city)
-    redirect_to response_locations_path(response_id: response_id, city: city)
-  end
-
-  def create_response_age(response_id, age)
-    redirect_to response_age_path(response_id: response_id, age: age)
+  def create_response_location_age(response_id, city, age)
+    redirect_to response_locations_path(response_id: response_id, city: city, age: age)
   end
 
 end

@@ -9,6 +9,8 @@ class AgeController < ApplicationController
   def create
     @age = Age.new(response_id: params[:response_id], age: params[:age])
     @age.save
+    redirect_to root_url
+  end
 
     private
 
